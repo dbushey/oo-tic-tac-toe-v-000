@@ -32,29 +32,44 @@ class TicTacToe
 
   def position_taken?(index)
   !(@board[index].nil? || @board[index] == " ")
-end
-
-def valid_move?(board, index)
-  if position_taken?(board, index)
-    return false
-
-  elsif index >= 0 && index <= 8
-    return true
-
-  else
-    return false
-
   end
-end
 
+  def valid_move?(index)
+    if position_taken?(@board, index)
+      return false
 
-  def current_player
-    turn_count % 2 == 0 ? "X" : "O"
+    elsif index >= 0 && index <= 8
+      return true
+
+    else
+      return false
+
+    end
+  end
+
+  def turn
+    puts "Please enter 1-9:"
+
+    input = gets.strip
+    index = input_to_index(input)
+
+    if valid_move?(index)
+      move(index, current_player)
+      display_board
+
+    else
+      turn
+
+    end
   end
 
   def turn_count
     @board.count{|token| token == "X" || token == "O"}
   end
 
+  def current_player
+    turn_count % 2 == 0 ? "X" : "O"
+  end
 
+  
 end
