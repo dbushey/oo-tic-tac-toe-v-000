@@ -30,6 +30,23 @@ class TicTacToe
     @board[index] = token
   end
 
+  def position_taken?(index)
+  !(@board[index].nil? || @board[index] == " ")
+end
+
+def valid_move?(board, index)
+  if position_taken?(board, index)
+    return false
+
+  elsif index >= 0 && index <= 8
+    return true
+
+  else
+    return false
+
+  end
+end
+
 
   def current_player
     turn_count % 2 == 0 ? "X" : "O"
